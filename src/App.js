@@ -1,3 +1,4 @@
+
 // import React, { Component, Fragment } from 'react'
 import React, { useState, useEffect, Fragment } from 'react'
 import { Route, Routes } from 'react-router-dom'
@@ -15,27 +16,35 @@ import ChangePassword from './components/auth/ChangePassword'
 import Dashboard from './components/Dashboard'
 import EachCoin from './components/EachCoin'
 import Contact from './components/Contact'
-import Edit from './components/Edit'
+require('dotenv').config()
 const App = () => {
 
 	const [user, setUser] = useState(null)
 	const [msgAlerts, setMsgAlerts] = useState([])
 	let [coins, setCoins] = useState([])
 	let [showCoin, setShowCoin] = useState([])
-	const [savedCoins, setSavedCoins] = useState([])
-	
-	let url = `https://api.coincap.io/v2/assets`
+	let url = "http://localhost:8000"
 
-	useEffect(() => {
-		fetch(url)
+	useEffect(()=> {
+		getCoins()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	},[user])
+
+	const getCoins = () => {
+		fetch(url, {
+			method: 'GET',
+			credentials: 'omit',
+			redirect: 'follow'
+		})
 			.then(response => response.json())
 			.then((coinData) => {
 				coinData = Object.values(coinData)
-				console.log('These are the coins', coinData)
+				console.log('Spam????');
 				setCoins(coinData[0])
 			})
-			.catch(err => console.error)
-	}, [coins])
+			.catch(err => console.log(err))
+	}
+	
 
 	const clearUser = () => {
 		console.log('clear user ran')
@@ -56,7 +65,7 @@ const App = () => {
 			)
 		})
 	}
-	// Function to set show choin to the database
+	// Function to set show coin to the database
 	const addShowCoin = (e) => {
 		setShowCoin([...showCoin, e])
 	}
@@ -73,7 +82,6 @@ const App = () => {
 							<Dashboard
 								msgAlert={msgAlert}
 								coins={coins}
-								followedCoin={showCoin}
 								onClick={addShowCoin}
 								savedCoins={savedCoins}
 								setSavedCoins={setSavedCoins}
@@ -81,12 +89,8 @@ const App = () => {
 						</RequireAuth>
 					}
 				/>
-				<Route path="/dashboard/:id" element={<EachCoin coinData={coins} user={user} savedCoins={savedCoins}/>}>
-				</Route>
-
-				<Route path="/contacts" element={<Contact />} 
-				/>
-
+				<Route path="/dashboard/:id" element={<EachCoin coinData={coins} />}></Route>
+				<Route path="/contacts" element={<Contact />} />
 				<Route
 					path='/sign-up'
 					element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
