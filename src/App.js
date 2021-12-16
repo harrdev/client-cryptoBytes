@@ -83,6 +83,8 @@ const App = () => {
 								msgAlert={msgAlert}
 								coins={coins}
 								onClick={addShowCoin}
+								savedCoins={savedCoins}
+								setSavedCoins={setSavedCoins}
 								user={user} />
 						</RequireAuth>
 					}
@@ -97,6 +99,7 @@ const App = () => {
 					path='/sign-in'
 					element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
 				/>
+
 				<Route
 					path='/sign-out'
 					element={

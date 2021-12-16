@@ -2,7 +2,7 @@ import { useParams } from "react-router";
 import { createCommentEntry, deleteComment } from '../api/commentdb'
 import { useState } from 'react'
 
-const EachCoin = (props) => {
+const EditCoin = (props) => {
     const { user, savedCoins } = props
     const coinName = useParams()
     let coinContent = props.coinData.filter(name => name.id.toLowerCase() === coinName.id.toLowerCase())
@@ -23,35 +23,12 @@ const EachCoin = (props) => {
         createCommentEntry(formData, user, coinContent, matchedCoin)
     }
 
-    const removeComment = (c) => {
-        deleteComment(c._id, matchedCoin)
-    }
-
-    const comments = matchedCoin[0].comments.map((c, i) => {
-        return (
-            <li key={i}>
-                {c.content}
-                <button onClick={() => removeComment(c)} id="delete">Delete</button>
-                <button id="edit">Edit</button>
-            </li>
-        )
-    })
-
 
     return (
         <div>
-            <h1>{coinContent.name}</h1>
-            <h2>{coinContent.rank}</h2>
-            <h3>{coinContent.priceUsd}</h3>
-            <p>{coinContent.supply}</p>
-            <p>{coinContent.changePercent24Hr}</p>
-
-            <ul className="comments">
-                {comments}
-            </ul>
-            <div className="commentForm">
+            <div className="editForm">
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="textArea">Thoughts on {coinContent.symbol}?</label>
+                    <label htmlFor="textArea">Edit here {coinContent.symbol}?</label>
                     <br />
                     <input id="textArea" onChange={handleChange} />
                     <br />
@@ -63,4 +40,4 @@ const EachCoin = (props) => {
 
 }
 
-export default EachCoin
+export default Edit
