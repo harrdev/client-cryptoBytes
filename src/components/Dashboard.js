@@ -22,7 +22,6 @@ function Dashboard(props) {
         createFollowedCoin(info, user)
             .then(res => {
                 console.log("This is response: ", res)
-
             })
     }
 
@@ -38,7 +37,7 @@ function Dashboard(props) {
         return (
             <li key={i}>
                 <div>
-                    <Link to={`${c.id}`}>{c.name}</Link>
+                    <p>{c.name}</p>
                     <br />
                     ${Number(c.priceUsd).toFixed(2)}
                     <br />

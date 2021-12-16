@@ -15,6 +15,7 @@ import ChangePassword from './components/auth/ChangePassword'
 import Dashboard from './components/Dashboard'
 import EachCoin from './components/EachCoin'
 import Contact from './components/Contact'
+import Edit from './components/Edit'
 const App = () => {
 
 	const [user, setUser] = useState(null)
@@ -80,8 +81,12 @@ const App = () => {
 						</RequireAuth>
 					}
 				/>
-				<Route path="/dashboard/:id" element={<EachCoin coinData={coins} user={user} savedCoins={savedCoins}/>}></Route>
-				<Route path="/contacts" element={<Contact />} />
+				<Route path="/dashboard/:id" element={<EachCoin coinData={coins} user={user} savedCoins={savedCoins}/>}>
+				</Route>
+
+				<Route path="/contacts" element={<Contact />} 
+				/>
+
 				<Route
 					path='/sign-up'
 					element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
@@ -90,6 +95,7 @@ const App = () => {
 					path='/sign-in'
 					element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
 				/>
+
 				<Route
 					path='/sign-out'
 					element={
