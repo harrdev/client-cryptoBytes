@@ -4,8 +4,6 @@ import steven from '../steven.jpeg'
 import jason from '../jason.jpeg'
 
 const Contact = (props) => {
-	// const { msgAlert, user } = props
-	console.log('props in home', props)
 // CHANGE INLINE STYLING WHEN STYLING PAGE!!!
 	return (
 		<div className="contact">
