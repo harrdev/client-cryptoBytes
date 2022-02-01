@@ -37,7 +37,6 @@ const App = () => {
 			.then(response => response.json())
 			.then((coinData) => {
 				coinData = Object.values(coinData)
-				console.log('Spam????');
 				setCoins(coinData[0])
 			})
 			.catch(err => console.log(err))
